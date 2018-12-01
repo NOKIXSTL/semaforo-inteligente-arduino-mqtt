@@ -50,14 +50,12 @@ void semaforo(){
     //time do semaforo 1
     int s1_VERDE = 10;
     int s1_AMARELO = 3;
-
+    int s1_VERMELHO = 15;
+    
     //tempo do semaforo 2
     int s2_VERDE = 10;
     int s2_AMARELO = 3;
-
-    //adicionas mais 2segundos referente ao delay de troca para iniciar um sinal verde
-    int s1_VERMELHO = s2_VERDE + s2_AMARELO + 2;
-    int s2_VERMELHO = s1_VERDE + s1_AMARELO + 2; 
+    int s2_VERMELHO = 14; 
 
     //Sinal 1 - VERDE | Sinal 2 - VERMELHO
     digitalWrite(S1_VERDE, HIGH); 
@@ -109,7 +107,7 @@ void semaforo(){
         //Sinal 1 - VERMELHO | Sinal 2 - VERMELHO
         digitalWrite(S1_AMARELO, LOW); 
         digitalWrite(S1_VERMELHO, HIGH); 
-        s1_VERMELHO = s2_VERDE + s2_AMARELO + 2;
+        s1_VERMELHO = 15;
         String str3 = "Samaforo 1 - VERMELHO - ";
         str3.concat(s1_VERMELHO);
         str3.concat("s"); 
