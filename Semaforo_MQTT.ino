@@ -14,13 +14,13 @@ int S2_VERMELHO = 5;
 
 //Variaveis de Rede
 byte mac[] = {0xDE, 0xED, 0xBA, 0xFE, 0xFE, 0xED};
-IPAddress ip(192, 168, 0, 168);
-IPAddress server(192, 168, 0, 166);
+IPAddress ip(192, 168, 0, 168); //IP do Arduino
+IPAddress server(192, 168, 0, 166); // IP do Servidor MQTT
 EthernetClient ethClient;
 PubSubClient client(ethClient);
 
 void callback(char* topic, byte* payload, unsigned int length) {
-  Serial.print("Message arrived [");
+  Serial.print("Mensagem recebida [");
   Serial.print(topic);
   Serial.print("] ");
   for (int i=0;i<length;i++) {
@@ -30,22 +30,16 @@ void callback(char* topic, byte* payload, unsigned int length) {
 }
 
 void reconnect() {
-  // Loop until we're reconnected
   while (!client.connected()) {
     Serial.print("Tentando conexão MQTT ...");
-    // Attempt to connect
     if (client.connect("arduinoClient")) {
       Serial.println("conectado");
-      // Once connected, publish an announcement...
-      client.publish("sinal","Semaforo Conectado");
+      client.publish("Semaforos","Semaforo Conectado");
       semaforo();
-      // ... and resubscribe
-//      client.subscribe("sinal");
     } else {
-      Serial.print("falhou, estado=");
+      Serial.print("falhou, estado = ");
       Serial.print(client.state());
       Serial.println(" tentando novamente em 1 segundos");
-      // Wait 5 seconds before retrying
       delay(1000);
     }
   }
@@ -53,13 +47,17 @@ void reconnect() {
 
 void semaforo(){
   while (client.connected()) {
+    //time do semaforo 1
     int s1_VERDE = 10;
     int s1_AMARELO = 3;
-    int s1_VERMELHO = 14;
 
+    //tempo do semaforo 2
     int s2_VERDE = 10;
     int s2_AMARELO = 3;
-    int s2_VERMELHO = 14;
+
+    //adicionas mais 2segundos referente ao delay de troca para iniciar um sinal verde
+    int s1_VERMELHO = s2_VERDE + s2_AMARELO + 2;
+    int s2_VERMELHO = s1_VERDE + s1_AMARELO + 2; 
 
     //Sinal 1 - VERDE | Sinal 2 - VERMELHO
     digitalWrite(S1_VERDE, HIGH); 
@@ -90,6 +88,7 @@ void semaforo(){
       delay(1000);  
     }
 
+    //Sinal 1 - AMARELO | Sinal 2 - VERMELHO
     digitalWrite(S1_VERDE, LOW); 
     digitalWrite(S1_AMARELO, HIGH); 
     digitalWrite(S1_VERMELHO, LOW); 
@@ -106,9 +105,11 @@ void semaforo(){
         str.toCharArray(char_array, str_len);
         client.publish("sinal", char_array);
       } else {
+        //Momento de delay de troca para iniciar verde
+        //Sinal 1 - VERMELHO | Sinal 2 - VERMELHO
         digitalWrite(S1_AMARELO, LOW); 
         digitalWrite(S1_VERMELHO, HIGH); 
-        s1_VERMELHO = 15;
+        s1_VERMELHO = s2_VERDE + s2_AMARELO + 2;
         String str3 = "Samaforo 1 - VERMELHO - ";
         str3.concat(s1_VERMELHO);
         str3.concat("s"); 
@@ -126,9 +127,10 @@ void semaforo(){
       str2.toCharArray(char2_array, str2_len);
       client.publish("sinal2", char2_array);
       s2_VERMELHO--;
-      delay(1000); // Espera por 3s   
+      delay(1000);  
     }
-  
+
+    //Sinal 1 - VERMELHO | Sinal 2 - VERDE
     digitalWrite(S1_VERDE, LOW); 
     digitalWrite(S1_AMARELO, LOW); 
     digitalWrite(S1_VERMELHO, HIGH);
@@ -155,7 +157,7 @@ void semaforo(){
       delay(1000);  
     }
 
-    
+    //Sinal 1 - VERMELHO | Sinal 2 - AMARELO
     digitalWrite(S1_VERDE, LOW); 
     digitalWrite(S1_AMARELO, LOW); 
     digitalWrite(S1_VERMELHO, HIGH); 
@@ -180,6 +182,8 @@ void semaforo(){
         str2.toCharArray(char2_array, str2_len);
         client.publish("sinal2", char2_array);
       } else {
+        //Momento de delay de troca para iniciar verde
+        //Sinal 1 - VERMELHO | Sinal 2 - VERMELHO
         digitalWrite(S2_AMARELO, LOW); 
         digitalWrite(S2_VERMELHO, HIGH);
         s2_VERMELHO = 15;
@@ -192,37 +196,39 @@ void semaforo(){
         client.publish("sinal2", char3_array);
         s2_VERMELHO--;
       }
-      delay(1000); // Espera por 3s   
+      delay(1000);
     }
  }
 }
 
 void setup() {
   Serial.begin(57600);
-  
+
+  //Iniciando portas do semaforo 1
   pinMode(S1_VERDE, OUTPUT);
   pinMode(S1_AMARELO, OUTPUT);
   pinMode(S1_VERMELHO, OUTPUT);
 
+  //Iniciando portas do semaforo 2
   pinMode(S2_VERDE, OUTPUT);
   pinMode(S2_AMARELO, OUTPUT);
   pinMode(S2_VERMELHO, OUTPUT);
 
+  //iniciando os dois semafomos no vermelho
   digitalWrite(S1_VERDE, LOW); 
   digitalWrite(S1_AMARELO, LOW); 
   digitalWrite(S1_VERMELHO, HIGH); 
-
   digitalWrite(S2_VERDE, LOW); 
   digitalWrite(S2_AMARELO, LOW); 
   digitalWrite(S2_VERMELHO, HIGH);
 
+  //setando servidor
   client.setServer(server, 1883);
   client.setCallback(callback);
 
+  //Setando configurações de rede
   Ethernet.begin(mac, ip);
-  // Allow the hardware to sort itself out
   delay(1500);
-
 }
 
 void loop() { 
