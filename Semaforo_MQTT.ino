@@ -57,7 +57,7 @@ void semaforo(){
     int s2_AMARELO = 3;
     int s2_VERMELHO = 14; 
 
-    //Sinal 1 - VERDE | Sinal 2 - VERMELHO
+    //semaforo 1 - VERDE | semaforo 2 - VERMELHO
     digitalWrite(S1_VERDE, HIGH); 
     digitalWrite(S1_AMARELO, LOW); 
     digitalWrite(S1_VERMELHO, LOW); 
@@ -67,26 +67,35 @@ void semaforo(){
     digitalWrite(S2_VERMELHO, HIGH); 
     
     for(;s1_VERDE > 0; s1_VERDE--){
-      String str = "Samaforo 1 - VERDE - ";
-      str.concat(s1_VERDE);
-      str.concat("s"); 
+      String str = "";
+      str.concat("{");
+        str.concat('"');str.concat("_id");str.concat('"');str.concat(":");str.concat("1");str.concat(",");
+        str.concat('"');str.concat("tempo");str.concat('"');str.concat(":");str.concat(s1_VERDE);str.concat(",");
+        str.concat('"');str.concat("sinal");str.concat('"');str.concat(":");str.concat('"');str.concat("VERDE");str.concat('"');
+      str.concat("}");   
+      Serial.println(str);
       int str_len = str.length() + 1; 
       char char_array[str_len];
       str.toCharArray(char_array, str_len);
-      client.publish("sinal", char_array);
+      client.publish("semaforo", char_array);
 
-      String str2 = "Samaforo 2 - VERMELHO - ";
-      str2.concat(s2_VERMELHO);
-      str2.concat("s"); 
+      String str2 = "";
+      str2.concat("{");
+        str2.concat('"');str2.concat("_id");str2.concat('"');str2.concat(":");str2.concat("2");str2.concat(",");
+        str2.concat('"');str2.concat("tempo");str2.concat('"');str2.concat(":");str2.concat(s2_VERMELHO);str2.concat(",");
+        str2.concat('"');str2.concat("sinal");str2.concat('"');str2.concat(":");str2.concat('"');str2.concat("VERMELHO");str2.concat('"');
+      str2.concat("}");   
+      Serial.println(str2);
+      
       int str2_len = str2.length() + 1; 
       char char2_array[str2_len];
       str2.toCharArray(char2_array, str2_len);
-      client.publish("sinal2", char2_array);
+      client.publish("semaforo", char2_array);
       s2_VERMELHO--;
       delay(1000);  
     }
 
-    //Sinal 1 - AMARELO | Sinal 2 - VERMELHO
+    //semaforo 1 - AMARELO | semaforo 2 - VERMELHO
     digitalWrite(S1_VERDE, LOW); 
     digitalWrite(S1_AMARELO, HIGH); 
     digitalWrite(S1_VERMELHO, LOW); 
@@ -95,40 +104,53 @@ void semaforo(){
     digitalWrite(S2_VERMELHO, HIGH);
     for(;s1_AMARELO + 1 > 0; s1_AMARELO--){
       if(s1_AMARELO >= 1){
-        String str = "Samaforo 1 - AMARELO - ";
-        str.concat(s1_AMARELO);
-        str.concat("s"); 
+        String str = "";
+        str.concat("{");
+          str.concat('"');str.concat("_id");str.concat('"');str.concat(":");str.concat("1");str.concat(",");
+          str.concat('"');str.concat("tempo");str.concat('"');str.concat(":");str.concat(s1_AMARELO);str.concat(",");
+          str.concat('"');str.concat("sinal");str.concat('"');str.concat(":");str.concat('"');str.concat("AMARELO");str.concat('"');
+        str.concat("}");   
+        Serial.println(str);
+
         int str_len = str.length() + 1; 
         char char_array[str_len];
         str.toCharArray(char_array, str_len);
-        client.publish("sinal", char_array);
+        client.publish("semaforo", char_array);
       } else {
         //Momento de delay de troca para iniciar verde
-        //Sinal 1 - VERMELHO | Sinal 2 - VERMELHO
+        //semaforo 1 - VERMELHO | semaforo 2 - VERMELHO
         digitalWrite(S1_AMARELO, LOW); 
         digitalWrite(S1_VERMELHO, HIGH); 
         s1_VERMELHO = 15;
-        String str3 = "Samaforo 1 - VERMELHO - ";
-        str3.concat(s1_VERMELHO);
-        str3.concat("s"); 
+        String str3 = "";
+        str3.concat("{");
+          str3.concat('"');str3.concat("_id");str3.concat('"');str3.concat(":");str3.concat("1");str3.concat(",");
+          str3.concat('"');str3.concat("tempo");str3.concat('"');str3.concat(":");str3.concat(s1_VERMELHO);str3.concat(",");
+          str3.concat('"');str3.concat("sinal");str3.concat('"');str3.concat(":");str3.concat('"');str3.concat("VERMELHO");str3.concat('"');
+        str3.concat("}");   
+        Serial.println(str3);
         int str3_len = str3.length() + 1; 
         char char3_array[str3_len];
         str3.toCharArray(char3_array, str3_len);
-        client.publish("sinal", char3_array);    
+        client.publish("semaforo", char3_array);    
         s1_VERMELHO--;    
       }
-      String str2 = "Samaforo 2 - VERMELHO - ";
-      str2.concat(s2_VERMELHO);
-      str2.concat("s"); 
+      String str2 = "";
+        str2.concat("{");
+          str2.concat('"');str2.concat("_id");str2.concat('"');str2.concat(":");str2.concat("2");str2.concat(",");
+          str2.concat('"');str2.concat("tempo");str2.concat('"');str2.concat(":");str2.concat(s2_VERMELHO);str2.concat(",");
+          str2.concat('"');str2.concat("sinal");str2.concat('"');str2.concat(":");str2.concat('"');str2.concat("VERMELHO");str2.concat('"');
+        str2.concat("}");   
+      Serial.println(str2);
       int str2_len = str2.length() + 1; 
       char char2_array[str2_len];
       str2.toCharArray(char2_array, str2_len);
-      client.publish("sinal2", char2_array);
+      client.publish("semaforo", char2_array);
       s2_VERMELHO--;
       delay(1000);  
     }
 
-    //Sinal 1 - VERMELHO | Sinal 2 - VERDE
+    //semaforo 1 - VERMELHO | semaforo 2 - VERDE
     digitalWrite(S1_VERDE, LOW); 
     digitalWrite(S1_AMARELO, LOW); 
     digitalWrite(S1_VERMELHO, HIGH);
@@ -136,26 +158,34 @@ void semaforo(){
     digitalWrite(S2_AMARELO, LOW); 
     digitalWrite(S2_VERMELHO, LOW); 
     for(;s2_VERDE > 0; s2_VERDE--){
-      String str = "Samaforo 1 - VERMELHO - ";
-      str.concat(s1_VERMELHO);
-      str.concat("s"); 
+      String str = "";
+      str.concat("{");
+        str.concat('"');str.concat("_id");str.concat('"');str.concat(":");str.concat("1");str.concat(",");
+        str.concat('"');str.concat("tempo");str.concat('"');str.concat(":");str.concat(s1_VERMELHO);str.concat(",");
+        str.concat('"');str.concat("sinal");str.concat('"');str.concat(":");str.concat('"');str.concat("VERMELHO");str.concat('"');
+      str.concat("}"); 
+      Serial.println(str);
       int str_len = str.length() + 1; 
       char char_array[str_len];
       str.toCharArray(char_array, str_len);
-      client.publish("sinal", char_array);
+      client.publish("semaforo", char_array);
 
-      String str2 = "Samaforo 2 - VERDE - ";
-      str2.concat(s2_VERDE);
-      str2.concat("s"); 
+      String str2 = "";
+      str2.concat("{");
+        str2.concat('"');str2.concat("_id");str2.concat('"');str2.concat(":");str2.concat("2");str2.concat(",");
+        str2.concat('"');str2.concat("tempo");str2.concat('"');str2.concat(":");str2.concat(s2_VERDE);str2.concat(",");
+        str2.concat('"');str2.concat("sinal");str2.concat('"');str2.concat(":");str2.concat('"');str2.concat("VERDE");str2.concat('"');
+      str2.concat("}");
+      Serial.println(str2);
       int str2_len = str2.length() + 1; 
       char char2_array[str2_len];
       str2.toCharArray(char2_array, str2_len);
-      client.publish("sinal2", char2_array);
+      client.publish("semaforo", char2_array);
       s1_VERMELHO--;
       delay(1000);  
     }
-
-    //Sinal 1 - VERMELHO | Sinal 2 - AMARELO
+    
+    //semaforo 1 - VERMELHO | semaforo 2 - AMARELO
     digitalWrite(S1_VERDE, LOW); 
     digitalWrite(S1_AMARELO, LOW); 
     digitalWrite(S1_VERMELHO, HIGH); 
@@ -163,35 +193,48 @@ void semaforo(){
     digitalWrite(S2_AMARELO, HIGH); 
     digitalWrite(S2_VERMELHO, LOW);
     for(;s2_AMARELO + 1 > 0; s2_AMARELO--){
-      String str = "Samaforo 1 - VERMELHO - ";
-      str.concat(s1_VERMELHO);
-      str.concat("s"); 
+      String str = "";
+      str.concat("{");
+        str.concat('"');str.concat("_id");str.concat('"');str.concat(":");str.concat("1");str.concat(",");
+        str.concat('"');str.concat("tempo");str.concat('"');str.concat(":");str.concat(s1_VERMELHO);str.concat(",");
+        str.concat('"');str.concat("sinal");str.concat('"');str.concat(":");str.concat('"');str.concat("VERMELHO");str.concat('"');
+      str.concat("}"); 
+      Serial.println(str);
       int str_len = str.length() + 1; 
       char char_array[str_len];
       str.toCharArray(char_array, str_len);
-      client.publish("sinal", char_array);
+      client.publish("semaforo", char_array);
       s1_VERMELHO--;
       if(s2_AMARELO >= 1){
-        String str2 = "Samaforo 2 - AMARELO - ";
-        str2.concat(s2_AMARELO);
-        str2.concat("s"); 
+        String str2 = "";
+        str2.concat("{");
+          str2.concat('"');str2.concat("_id");str2.concat('"');str2.concat(":");str2.concat("2");str2.concat(",");
+          str2.concat('"');str2.concat("tempo");str2.concat('"');str2.concat(":");str2.concat(s2_AMARELO);str2.concat(",");
+          str2.concat('"');str2.concat("sinal");str2.concat('"');str2.concat(":");str2.concat('"');str2.concat("AMERELO");str2.concat('"');
+        str2.concat("}");     
+        Serial.println(str2);
         int str2_len = str2.length() + 1; 
         char char2_array[str2_len];
         str2.toCharArray(char2_array, str2_len);
-        client.publish("sinal2", char2_array);
+        client.publish("semaforo", char2_array);
       } else {
         //Momento de delay de troca para iniciar verde
-        //Sinal 1 - VERMELHO | Sinal 2 - VERMELHO
+        //semaforo 1 - VERMELHO | semaforo 2 - VERMELHO
         digitalWrite(S2_AMARELO, LOW); 
         digitalWrite(S2_VERMELHO, HIGH);
         s2_VERMELHO = 15;
-        String str3 = "Samaforo 2 - VERMELHO - ";
-        str3.concat(s2_VERMELHO);
-        str3.concat("s"); 
+        
+        String str3 = "";
+        str3.concat("{");
+          str3.concat('"');str3.concat("_id");str3.concat('"');str3.concat(":");str3.concat("2");str3.concat(",");
+          str3.concat('"');str3.concat("tempo");str3.concat('"');str3.concat(":");str3.concat(s2_VERMELHO);str3.concat(",");
+          str3.concat('"');str3.concat("sinal");str3.concat('"');str3.concat(":");str3.concat('"');str3.concat("VERMELHO");str3.concat('"');
+        str3.concat("}"); 
+        Serial.println(str3);
         int str3_len = str3.length() + 1; 
         char char3_array[str3_len];
         str3.toCharArray(char3_array, str3_len);
-        client.publish("sinal2", char3_array);
+        client.publish("semaforo", char3_array);
         s2_VERMELHO--;
       }
       delay(1000);
