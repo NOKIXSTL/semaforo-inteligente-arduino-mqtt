@@ -69,7 +69,7 @@ void semaforo(){
     for(;s1_VERDE > 0; s1_VERDE--){
       String str = "";
       str.concat("{");
-        str.concat('"');str.concat("_id");str.concat('"');str.concat(":");str.concat("1");str.concat(",");
+        str.concat('"');str.concat("_id");str.concat('"');str.concat(":");str.concat('"');str.concat("1");str.concat('"');str.concat(",");
         str.concat('"');str.concat("tempo");str.concat('"');str.concat(":");str.concat(s1_VERDE);str.concat(",");
         str.concat('"');str.concat("sinal");str.concat('"');str.concat(":");str.concat('"');str.concat("VERDE");str.concat('"');
       str.concat("}");   
@@ -81,7 +81,7 @@ void semaforo(){
 
       String str2 = "";
       str2.concat("{");
-        str2.concat('"');str2.concat("_id");str2.concat('"');str2.concat(":");str2.concat("2");str2.concat(",");
+        str2.concat('"');str2.concat("_id");str2.concat('"');str2.concat(":");str2.concat('"');str2.concat("2");str2.concat('"');str2.concat(",");
         str2.concat('"');str2.concat("tempo");str2.concat('"');str2.concat(":");str2.concat(s2_VERMELHO);str2.concat(",");
         str2.concat('"');str2.concat("sinal");str2.concat('"');str2.concat(":");str2.concat('"');str2.concat("VERMELHO");str2.concat('"');
       str2.concat("}");   
@@ -106,7 +106,7 @@ void semaforo(){
       if(s1_AMARELO >= 1){
         String str = "";
         str.concat("{");
-          str.concat('"');str.concat("_id");str.concat('"');str.concat(":");str.concat("1");str.concat(",");
+          str.concat('"');str.concat("_id");str.concat('"');str.concat(":");str.concat('"');str.concat("1");str.concat('"');str.concat(",");
           str.concat('"');str.concat("tempo");str.concat('"');str.concat(":");str.concat(s1_AMARELO);str.concat(",");
           str.concat('"');str.concat("sinal");str.concat('"');str.concat(":");str.concat('"');str.concat("AMARELO");str.concat('"');
         str.concat("}");   
@@ -124,7 +124,7 @@ void semaforo(){
         s1_VERMELHO = 15;
         String str3 = "";
         str3.concat("{");
-          str3.concat('"');str3.concat("_id");str3.concat('"');str3.concat(":");str3.concat("1");str3.concat(",");
+          str3.concat('"');str3.concat("_id");str3.concat('"');str3.concat(":");str3.concat('"');str3.concat("1");str3.concat('"');str3.concat(",");
           str3.concat('"');str3.concat("tempo");str3.concat('"');str3.concat(":");str3.concat(s1_VERMELHO);str3.concat(",");
           str3.concat('"');str3.concat("sinal");str3.concat('"');str3.concat(":");str3.concat('"');str3.concat("VERMELHO");str3.concat('"');
         str3.concat("}");   
@@ -137,7 +137,7 @@ void semaforo(){
       }
       String str2 = "";
         str2.concat("{");
-          str2.concat('"');str2.concat("_id");str2.concat('"');str2.concat(":");str2.concat("2");str2.concat(",");
+          str2.concat('"');str2.concat("_id");str2.concat('"');str2.concat(":");str2.concat('"');str2.concat("2");str2.concat('"');str2.concat(",");
           str2.concat('"');str2.concat("tempo");str2.concat('"');str2.concat(":");str2.concat(s2_VERMELHO);str2.concat(",");
           str2.concat('"');str2.concat("sinal");str2.concat('"');str2.concat(":");str2.concat('"');str2.concat("VERMELHO");str2.concat('"');
         str2.concat("}");   
@@ -160,7 +160,7 @@ void semaforo(){
     for(;s2_VERDE > 0; s2_VERDE--){
       String str = "";
       str.concat("{");
-        str.concat('"');str.concat("_id");str.concat('"');str.concat(":");str.concat("1");str.concat(",");
+        str.concat('"');str.concat("_id");str.concat('"');str.concat(":");str.concat('"');str.concat("1");str.concat('"');str.concat(",");
         str.concat('"');str.concat("tempo");str.concat('"');str.concat(":");str.concat(s1_VERMELHO);str.concat(",");
         str.concat('"');str.concat("sinal");str.concat('"');str.concat(":");str.concat('"');str.concat("VERMELHO");str.concat('"');
       str.concat("}"); 
@@ -172,7 +172,7 @@ void semaforo(){
 
       String str2 = "";
       str2.concat("{");
-        str2.concat('"');str2.concat("_id");str2.concat('"');str2.concat(":");str2.concat("2");str2.concat(",");
+        str2.concat('"');str2.concat("_id");str2.concat('"');str2.concat(":");str2.concat('"');str2.concat("2");str2.concat('"');str2.concat(",");
         str2.concat('"');str2.concat("tempo");str2.concat('"');str2.concat(":");str2.concat(s2_VERDE);str2.concat(",");
         str2.concat('"');str2.concat("sinal");str2.concat('"');str2.concat(":");str2.concat('"');str2.concat("VERDE");str2.concat('"');
       str2.concat("}");
@@ -195,7 +195,7 @@ void semaforo(){
     for(;s2_AMARELO + 1 > 0; s2_AMARELO--){
       String str = "";
       str.concat("{");
-        str.concat('"');str.concat("_id");str.concat('"');str.concat(":");str.concat("1");str.concat(",");
+        str.concat('"');str.concat("_id");str.concat('"');str.concat(":");str.concat('"');str.concat("1");str.concat('"');str.concat(",");
         str.concat('"');str.concat("tempo");str.concat('"');str.concat(":");str.concat(s1_VERMELHO);str.concat(",");
         str.concat('"');str.concat("sinal");str.concat('"');str.concat(":");str.concat('"');str.concat("VERMELHO");str.concat('"');
       str.concat("}"); 
@@ -208,7 +208,7 @@ void semaforo(){
       if(s2_AMARELO >= 1){
         String str2 = "";
         str2.concat("{");
-          str2.concat('"');str2.concat("_id");str2.concat('"');str2.concat(":");str2.concat("2");str2.concat(",");
+          str2.concat('"');str2.concat("_id");str2.concat('"');str2.concat(":");str2.concat('"');str2.concat("2");str2.concat('"');str2.concat(",");
           str2.concat('"');str2.concat("tempo");str2.concat('"');str2.concat(":");str2.concat(s2_AMARELO);str2.concat(",");
           str2.concat('"');str2.concat("sinal");str2.concat('"');str2.concat(":");str2.concat('"');str2.concat("AMERELO");str2.concat('"');
         str2.concat("}");     
@@ -226,7 +226,7 @@ void semaforo(){
         
         String str3 = "";
         str3.concat("{");
-          str3.concat('"');str3.concat("_id");str3.concat('"');str3.concat(":");str3.concat("2");str3.concat(",");
+          str3.concat('"');str3.concat("_id");str3.concat('"');str3.concat(":");str3.concat('"');str3.concat("2");str3.concat('"');str3.concat(",");
           str3.concat('"');str3.concat("tempo");str3.concat('"');str3.concat(":");str3.concat(s2_VERMELHO);str3.concat(",");
           str3.concat('"');str3.concat("sinal");str3.concat('"');str3.concat(":");str3.concat('"');str3.concat("VERMELHO");str3.concat('"');
         str3.concat("}"); 
